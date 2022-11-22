@@ -22,6 +22,8 @@ console.log(client.commands);
 
 const player = new Player(client);
 
+const reactionEmoji = client.emojis.cache.find(emoji => emoji.name === 'RETARD_GENIE');
+
 player.on('error', (queue, error) => {
   console.log(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`);
 });
@@ -31,7 +33,7 @@ player.on('connectionError', (queue, error) => {
 });
 
 player.on('trackStart', (queue, track) => {
-  queue.metadata.send(`▶ | Started playing: **${track.title}** in **${queue.connection.channel.name}**!`);
+  queue.metadata.send(`**${reactionEmoji}** | Started playing: **${track.title}** in **${queue.connection.channel.name}**!`);
 });
 
 player.on('trackAdd', (queue, track) => {
@@ -43,11 +45,11 @@ player.on('botDisconnect', queue => {
 });
 
 player.on('channelEmpty', queue => {
-  queue.metadata.send('❌ | Nobody is in the voice channel, leaving...');
+  queue.metadata.send('❌ | Nobody is in the voice channel. Stinky nuts...');
 });
 
 player.on('queueEnd', queue => {
-  queue.metadata.send('✅ | Queue finished!');
+  queue.metadata.send('✅ | Queue finished Pinche Poopo Guapo!');
 });
 
 client.once('ready', async () => {
@@ -57,16 +59,16 @@ client.once('ready', async () => {
 client.on('ready', function() {
   client.user.setPresence({
     activities: [{ name: config.activity, type: config.activityType }],
-    status: 'Playing music',
+    status: 'Playing music as FREDBOAT',
   });
 });
 
 client.once('reconnecting', () => {
-  console.log('Reconnecting!');
+  console.log('Reconnecting. Drinking my chilled mug!');
 });
 
 client.once('disconnect', () => {
-  console.log('Disconnect!');
+  console.log('Disconnected! I lost my poptart camera');
 });
 
 client.on('messageCreate', async message => {
@@ -77,7 +79,7 @@ client.on('messageCreate', async message => {
     await message.guild.commands
       .set(client.commands)
       .then(() => {
-        message.reply('Deployed!');
+        message.reply('STINKY NUTS');
       })
       .catch(err => {
         message.reply('Could not deploy commands! Make sure the bot has the application.commands permission!');
