@@ -22,8 +22,6 @@ console.log(client.commands);
 
 const player = new Player(client);
 
-const reactionEmoji = client.emojis.cache.find(emoji => emoji.name === 'RETARD_GENIE');
-
 player.on('error', (queue, error) => {
   console.log(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`);
 });
@@ -32,28 +30,35 @@ player.on('connectionError', (queue, error) => {
   console.log(`[${queue.guild.name}] Error emitted from the connection: ${error.message}`);
 });
 
+// Genie:          1042558036255973447
+// Play button:    1044732835656896574
+// Laughing Skull: 1044733332400898048
+// Notes:          1044732781562974250
+// Loading:        1044732872491274250
+// Knoot:          852725377184825354
+// MURR:           869772707833716796
 player.on('trackStart', (queue, track) => {
-  queue.metadata.send(`**${reactionEmoji}** | Started playing: **${track.title}** in **${queue.connection.channel.name}**!`);
+  queue.metadata.send(`${client.emojis.cache.get('1044732835656896574')} | Started playing: **${track.title}** in **${queue.connection.channel.name}**!`);
 });
 
 player.on('trackAdd', (queue, track) => {
-  queue.metadata.send(`🎶 | Track **${track.title}** queued!`);
+  queue.metadata.send(`${client.emojis.cache.get('1044732781562974250')}  | Track **${track.title}** queued!`);
 });
 
 player.on('botDisconnect', queue => {
-  queue.metadata.send('❌ | I was manually disconnected from the voice channel, clearing queue!');
+  queue.metadata.send(`${client.emojis.cache.get('1044733332400898048')} | I was manually disconnected from the voice channel, clearing queue!`);
 });
 
 player.on('channelEmpty', queue => {
-  queue.metadata.send('❌ | Nobody is in the voice channel. Stinky nuts...');
+  queue.metadata.send(`${client.emojis.cache.get('1044733332400898048')} | Nobody is in the voice channel. Stinky nuts...`);
 });
 
 player.on('queueEnd', queue => {
-  queue.metadata.send('✅ | Queue finished Pinche Poopo Guapo!');
+  queue.metadata.send(`${client.emojis.cache.get('852725377184825354')}  | Queue finished Pinche Poopo Guapo!`);
 });
 
 client.once('ready', async () => {
-  console.log('Ready!');
+  console.log('Ready Motha Fucka!');
 });
 
 client.on('ready', function() {
