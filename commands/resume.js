@@ -25,11 +25,11 @@ module.exports = {
     const queue = player.getQueue(interaction.guildId);
     if (!queue || !queue.playing)
       return void interaction.followUp({
-        content: '❌ | No music is being played!',
+        content: `${interaction.client.emojis.cache.get('1044732872491274250')} | No music is being played!`,
       });
     const success = queue.setPaused(false);
     return void interaction.followUp({
-      content: success ? '▶ | Resumed!' : '❌ | Something went wrong!',
+      content: success ? '▶ | Resumed!' : `${interaction.client.emojis.cache.get('1044732872491274250')} | Something went wrong!`,
     });
   },
 };

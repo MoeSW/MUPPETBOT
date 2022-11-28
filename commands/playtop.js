@@ -1,9 +1,6 @@
 const {GuildMember, ApplicationCommandOptionType} = require('discord.js');
 const {QueryType} = require('discord-player');
 
-//const {Client} = require('../client/Client');
-//const client = new Client();
-
 module.exports = {
   name: 'playtop',
   description: 'Play a song before the next in your channel!',
@@ -67,7 +64,7 @@ module.exports = {
 
       //${client.emojis.cache.get('1044732872491274250')}
       await interaction.followUp({
-        content: `🕑 | Loading your ${searchResult.playlist ? 'playlist' : 'track'}...`,
+        content: `${interaction.client.emojis.cache.get('1044732872491274250')} | Loading your ${searchResult.playlist ? 'playlist' : 'track'}...`,
       });
       searchResult.playlist ? queue.insert(searchResult.tracks, 0) : queue.insert(searchResult.tracks[0], 0);
       if (!queue.playing) await queue.play();

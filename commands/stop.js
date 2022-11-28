@@ -25,9 +25,9 @@ module.exports = {
     const queue = player.getQueue(interaction.guildId);
     if (!queue || !queue.playing)
       return void interaction.followUp({
-        content: `${client.emojis.cache.get('1044733332400898048')} | No music is being played!`,
+        content: `${interaction.client.emojis.cache.get('1044733332400898048')} | No music is being played!`,
       });
     queue.destroy();
-    return void interaction.followUp({content: `${client.emojis.cache.get('1044733332400898048')} | Stopped the player!`});
+    return void interaction.followUp({content: `${interaction.client.emojis.cache.get('1044733332400898048')} | Stopped the player!`});
   },
 };

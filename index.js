@@ -22,6 +22,10 @@ console.log(client.commands);
 
 const player = new Player(client);
 
+
+
+//module.exports = {client};
+
 player.on('error', (queue, error) => {
   console.log(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`);
 });
@@ -111,3 +115,5 @@ client.on('interactionCreate', async interaction => {
 });
 
 client.login(process.env.DISCORD_TOKEN);
+
+//module.exports = {client};
