@@ -22,9 +22,20 @@ console.log(client.commands);
 
 const player = new Player(client);
 
+player.on('connectionCreate', (queue) => {
+    queue.connection.voiceConnection.on('stateChange', (oldState, newState) => {
+      const oldNetworking = Reflect.get(oldState, 'networking');
+      const newNetworking = Reflect.get(newState, 'networking');
 
+      const networkStateChangeHandler = (oldNetworkState, newNetworkState) => {
+        const newUdp = Reflect.get(newNetworkState, 'udp');
+        clearInterval(newUdp?.keepAliveInterval);
+      }
 
-//module.exports = {client};
+      oldNetworking?.off('stateChange', networkStateChangeHandler);
+      newNetworking?.on('stateChange', networkStateChangeHandler);
+    });
+});
 
 player.on('error', (queue, error) => {
   console.log(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`);
@@ -67,8 +78,8 @@ client.once('ready', async () => {
 
 client.on('ready', function() {
   client.user.setPresence({
-    activities: [{ name: config.activity, type: config.activityType }],
-    status: 'Playing music as FREDBOAT',
+    activities: [{ name: config.activity, type: Number(config.activityType) }],
+    status: Discord.PresenceUpdateStatus.Online,
   });
 });
 
